@@ -5,7 +5,7 @@ const List = ({ reviews = [] }) => (
   <section>
     <ul>
       {
-        reviews.map(review => <Item key={review.childAsin} {...review} />)
+        reviews.map(review => <Item key={review.reviewId} {...review} />)
       }
     </ul>
   </section>

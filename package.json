@@ -8,6 +8,7 @@
   "license": "MIT",
   "private": false,
   "dependencies": {
+    "babel-plugin-styled-components": "^1.5.1",
     "eslint-config-standard": "^11.0.0",
     "eslint-config-standard-react": "^6.0.0",
     "eslint-plugin-import": "^2.13.0",
@@ -16,10 +17,14 @@
     "eslint-plugin-react": "^7.10.0",
     "eslint-plugin-standard": "^3.1.0",
     "isomorphic-unfetch": "^2.1.0",
+    "moment": "^2.22.2",
     "next": "^6.1.1",
+    "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
-    "standard": "^11.0.1"
+    "react-stars": "^2.2.5",
+    "standard": "^11.0.1",
+    "styled-components": "^3.3.3"
   },
   "scripts": {
     "dev": "NODE_ENV=development next",
