@@ -1,0 +1,30 @@
+{
+  "name": "codechallenge-sellics",
+  "version": "0.1.0",
+  "description": "Code challenge for Sellics",
+  "main": "page/index.js",
+  "repository": "https://github.com/jhta/codechallenge-sellics.git",
+  "author": "jhta <jeisonhs93@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "eslint-config-standard": "^11.0.0",
+    "eslint-config-standard-react": "^6.0.0",
+    "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-node": "^7.0.1",
+    "eslint-plugin-promise": "^3.8.0",
+    "eslint-plugin-react": "^7.10.0",
+    "eslint-plugin-standard": "^3.1.0",
+    "next": "^6.1.1",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "standard": "^11.0.1"
+  },
+  "scripts": {
+    "dev": "NODE_ENV=development next",
+    "start": "NODE_ENV=production next start",
+    "build": "next build",
+    "lint": "standard --verbose",
+    "lint:fix": "standard --fix"
+  }
+}
