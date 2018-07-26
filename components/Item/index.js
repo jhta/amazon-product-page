@@ -1,5 +1,5 @@
 import React from 'react'
 
-const Item = props => <div> Im a item </div>
+const Item = ({ title }) => <li>{ title }</li>
 
 export default Item

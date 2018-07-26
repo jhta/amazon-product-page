@@ -1,12 +1,13 @@
 import React from 'react'
 import Item from 'components/Item'
 
-const List = props => (
+const List = ({ reviews = [] }) => (
   <section>
-    <Item />
-    <Item />
-    <Item />
-    <Item />
+    <ul>
+      {
+        reviews.map(review => <Item key={review.childAsin} {...review} />)
+      }
+    </ul>
   </section>
 )
 
