@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import List from 'components/List'
+import Container from 'components/ui/Container'
 import fetch from 'isomorphic-unfetch'
 
 const API_URI = 'https://sellics-frontend-test.herokuapp.com/reviews/1'
@@ -12,9 +13,9 @@ class Page extends Component {
   }
   render () {
     return (
-      <React.Fragment>
+      <Container>
         <List reviews={this.props.reviews} />
-      </React.Fragment>
+      </Container>
     )
   }
 }
