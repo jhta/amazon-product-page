@@ -2,15 +2,15 @@ import React, { Component } from 'react'
 import Container from 'components/ui/Container'
 import ListGroup from 'components/ListGroup'
 import Form from 'components/Form'
-import store from 'store'
+import initialStore from 'store'
+import withRematch from 'libs/withRematch'
 
 class Page extends Component {
-  static async getInitialProps ({ req }) {
-    await (store.dispatch({ type: 'reviews/load' }))
-    const initialState = store.getState()
-    return {
-      ...initialState.reviews
+  static async getInitialProps ({ store, isServer }) {
+    if (isServer) {
+      await store.dispatch.reviews.load()
     }
+    return {}
   }
 
   render () {
@@ -23,4 +23,8 @@ class Page extends Component {
   }
 }
 
-export default Page
+const mapState = ({ reviews: { groups } }) => ({
+  groups
+})
+
+export default withRematch(initialStore, mapState, null)(Page)
