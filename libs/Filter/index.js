@@ -8,10 +8,10 @@ const FILTERS = {
 
 class Filter {
   constructor () {
-    this._days = new Map()
-    this._weeks = new Map()
-    this._months = new Map()
-    this._tree = null
+    this._days = null
+    this._weeks = null
+    this._months = null
+    this._reviews = []
   }
 
   filter (reviews = [], dateFilter, dateMap) {
@@ -35,24 +35,43 @@ class Filter {
       case FILTERS.DAY:
         return momentDate.format('MMM Do YYYY')
       case FILTERS.WEEK:
-        const startWeek = momentDate.startOf('week')
-        const endWeek = momentDate.endOf('week')
+        const startWeek = momentDate.clone().weekday(1)
+        const endWeek = momentDate.clone().weekday(7)
         return `${startWeek.format('MMMM Do')} - ${endWeek.format('MMMM Do')}`
     }
   }
 
+  reviewsAreDeepEqual (reviews = []) {
+    if (reviews.length === this._reviews.length) {
+      return !reviews.some((review, index) => review.reviewId !== this._reviews[index].reviewId)
+    }
+    return false
+  }
+
   byMonth (reviews = []) {
-    this._months = this.filter(reviews, FILTERS.MONTH, new Map(this._months))
+    if (!this.reviewsAreDeepEqual(reviews) || !this._months) {
+      this._reviews = reviews
+      this._months = this.filter(reviews, FILTERS.MONTH, new Map())
+    }
+
     return this.render(this._months)
   }
 
   byDay (reviews = []) {
-    this._days = this.filter(reviews, FILTERS.DAY, new Map(this._days))
+    if (!this.reviewsAreDeepEqual(reviews) || !this._days) {
+      this._reviews = reviews
+      this._days = this.filter(reviews, FILTERS.DAY, new Map())
+    }
+
     return this.render(this._days)
   }
 
   byWeek (reviews = []) {
-    this._weeks = this.filter(reviews, FILTERS.WEEK, new Map(this._weeks))
+    if (!this.reviewsAreDeepEqual(reviews) || !this._weeks) {
+      this._reviews = reviews
+      this._weeks = this.filter(reviews, FILTERS.WEEK, new Map())
+    }
+
     return this.render(this._weeks)
   }
 

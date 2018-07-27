@@ -13,18 +13,28 @@ class Page extends Component {
     return {}
   }
 
+  componentDidMount () {
+    this.props.start()
+  }
+
   render () {
+    const { order, groups } = this.props
     return (
       <Container>
         <Form />
-        <ListGroup groups={this.props.groups} />
+        <ListGroup groups={order === 'latest' ? groups : groups.slice().reverse()} order={order} />
       </Container>
     )
   }
 }
 
-const mapState = ({ reviews: { groups } }) => ({
-  groups
+const mapState = ({ reviews: { groups, order } }) => ({
+  groups,
+  order
 })
 
-export default withRematch(initialStore, mapState, null)(Page)
+const mapDispatch = ({ reviews: { startFilter } }) => ({
+  start: startFilter
+})
+
+export default withRematch(initialStore, mapState, mapDispatch)(Page)

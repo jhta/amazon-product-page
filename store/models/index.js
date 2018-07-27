@@ -8,13 +8,21 @@ let filter = null
 const getPage = page => `${API_URI}${page}`
 
 const initialState = {
-  filter: 'days',
+  filter: null,
   groups: [],
   reviews: [],
   error: null,
   page: 1,
-  hasMore: false
+  hasMore: false,
+  order: 'latest',
+  filterDate: 'month'
 }
+
+const selectFilter = (filterDate = 'month', filter) => filterDate === 'day'
+  ? filter.byDay
+  : filterDate === 'week'
+    ? filter.byWeek
+    : filter.byMonth
 
 export const reviews = {
   state: initialState,
@@ -24,12 +32,21 @@ export const reviews = {
       ...state,
       ...payload
     }),
-    filterByWeek: (state, { reviews }) => state,
-    filterByDay: (state, { reviews }) => state,
-    filterByMonth: (state, { reviews }) => ({
+    filterBy: (state, { filterDate, reviews = null }) => filterDate !== state.filterDate
+      ? ({
+        ...state,
+        filterDate,
+        groups: selectFilter(filterDate, state.filter)(reviews || state.reviews),
+        reviews: reviews || state.reviews
+      })
+      : state,
+    startFilter: (state) => ({
       ...state,
-      groups: filter.byMonth(reviews),
-      reviews
+      filter: Filter()
+    }),
+    swithOrder: (state, order = 'latest') => ({
+      ...state,
+      order
     })
   },
 
