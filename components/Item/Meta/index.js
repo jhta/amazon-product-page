@@ -30,7 +30,7 @@ const Meta = ({ reviewCreated, reviewId, productTitle, stars }) => (
 )
 
 Meta.propTypes = {
-  reviewCreated: PropTypes.string,
+  reviewCreated: PropTypes.number,
   stars: PropTypes.number,
   productTitle: PropTypes.string,
   reviewId: PropTypes.string
