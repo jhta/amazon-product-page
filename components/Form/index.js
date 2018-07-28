@@ -1,6 +1,7 @@
 import React from 'react'
 import GroupSelector from '../GroupSelector'
 import OrderSelector from '../OrderSelector'
+import StarsFilter from '../StarsFilter'
 import Stars from 'react-stars'
 
 const Form = props => (
@@ -8,14 +9,7 @@ const Form = props => (
     Form
     <GroupSelector />
     <OrderSelector />
-    <p>Filter By:</p>
-    <Stars
-      value={5}
-      size={20}
-      color1={'#ddd'}
-      color2={'black'}
-      edit={false}
-    />
+    <StarsFilter />
   </section>
 )
 

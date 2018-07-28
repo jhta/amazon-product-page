@@ -15,7 +15,8 @@ const initialState = {
   page: 1,
   hasMore: false,
   order: 'latest',
-  filterDate: 'month'
+  filterDate: 'month',
+  stars: 5
 }
 
 const selectFilter = (filterDate = 'month', filter) => filterDate === 'day'
@@ -23,6 +24,16 @@ const selectFilter = (filterDate = 'month', filter) => filterDate === 'day'
   : filterDate === 'week'
     ? filter.byWeek
     : filter.byMonth
+
+const filterStars = (reviews = [], stars) => reviews
+  .filter(review => review.stars === stars)
+
+const groupsByStars = ({ reviews, filterDate, filter }, stars) => selectFilter(
+  filterDate,
+  filter
+)(
+  filterStars(reviews, stars)
+)
 
 export const reviews = {
   state: initialState,
@@ -47,17 +58,22 @@ export const reviews = {
     swithOrder: (state, order = 'latest') => ({
       ...state,
       order
+    }),
+    filterByStars: (state, stars) => ({
+      ...state,
+      stars,
+      groups: groupsByStars(state, stars)
     })
   },
 
   effects: dispatch => ({
-    load: async (page = 1) => {
+    load: async (page = 1, state) => {
       try {
         const res = await fetch(getPage(page))
         const data = await res.json()
         filter = Filter()
-        const groups = filter.byMonth(data.reviews) || []
-        dispatch.reviews.set({ ...data, groups })
+        const groups = filter.byMonth(filterStars(data.reviews, 5)) || []
+        dispatch.reviews.set({ ...data, groups, filter })
       } catch (e) {
         dispatch.reviews.set({ error: e.message })
       }
