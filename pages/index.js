@@ -22,7 +22,10 @@ class Page extends Component {
     return (
       <Container>
         <Form />
-        <ListGroup groups={order === 'latest' ? groups : groups.slice().reverse()} order={order} />
+        <ListGroup
+          groups={order === 'latest' ? groups : groups.slice().reverse()}
+          order={order}
+        />
       </Container>
     )
   }

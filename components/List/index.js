@@ -2,13 +2,16 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Item from 'components/Item'
 import ListStyled from './styled'
+import Fade from 'react-reveal/Fade'
 
 const List = ({ reviews = [] }) => (
-  <ListStyled>
-    {
-      reviews.map(review => <Item key={review.reviewId} {...review} />)
-    }
-  </ListStyled>
+  <Fade>
+    <ListStyled>
+      {
+        reviews.map(review => <Item key={review.reviewId} {...review} />)
+      }
+    </ListStyled>
+  </Fade>
 )
 
 List.propTypes = {
