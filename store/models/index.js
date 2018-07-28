@@ -63,6 +63,17 @@ export const reviews = {
       ...state,
       stars,
       groups: groupsByStars(state, stars)
+    }),
+    addMore: (state, { reviews, hasMore }) => ({
+      ...state,
+      ...payload,
+      hasMore,
+      page: state.page +  1,
+      groups: groupsByStars({
+        ...state,
+        reviews: [...state.reviews, ...reviews]
+      }, state.stars),
+      reviews: [...state.reviews, ...reviews]
     })
   },
 
@@ -74,6 +85,16 @@ export const reviews = {
         filter = Filter()
         const groups = filter.byMonth(filterStars(data.reviews, 5)) || []
         dispatch.reviews.set({ ...data, groups, filter })
+      } catch (e) {
+        dispatch.reviews.set({ error: e.message })
+      }
+    },
+    add: async (payload, state) => {
+      try {
+        const { page } = state.reviews
+        const res = await fetch(getPage(page + 1))
+        const data = await res.json()
+        dispatch.reviews.addMore(data)
       } catch (e) {
         dispatch.reviews.set({ error: e.message })
       }
