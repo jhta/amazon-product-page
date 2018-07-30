@@ -4,7 +4,7 @@ const Container = styled.section`
   box-sizing: border-box;
   position: relative;
   margin: 0 auto;
-  max-width: 992px;
+  max-width: 800px;
 `
 
 export default Container

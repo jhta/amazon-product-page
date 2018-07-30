@@ -1,13 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Meta from './Meta'
-import ItemStyled from './styled'
+import { ItemStyled, Description } from './styled'
 
 const Item = (props) => (
   <ItemStyled>
     <Meta {...props} />
     <h2>{ props.title }</h2>
-    <p>{ props.content }</p>
+    <Description>{ props.content }</Description>
   </ItemStyled>
 )
 

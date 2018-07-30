@@ -15,11 +15,29 @@ const options = [
 
 ]
 
+const styles = {
+  valueContainer: (o) =>({
+    ...o,
+    minWidth: '120px'
+  }),
+  container: (o) => ({
+    ...o,
+    borderRadius: '5px'
+  }),
+  control: (o) => ({
+    ...o,
+    border: '1px solid #03a9f4',
+    borderRadius: '15px',
+    background: 'white'
+  })
+}
+
 const OrderSelector = ({ swithOrder }) => (
   <Select
     defaultValue={options[0]}
     options={options}
     onChange={(op) => { swithOrder(op.value) }}
+    styles={styles}
   />
 )
 

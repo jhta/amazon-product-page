@@ -3,6 +3,9 @@ import styled from 'styled-components'
 export const P = styled.p`
   margin: 0;
   font-size: 14px;
+  text-transform: uppercase;
+  color: #aaa;
+  font-weight: bold;
 `
 export const Bold = styled.p`
   font-weight: bold;
@@ -13,6 +16,6 @@ export const MetaStyled = styled.article`
 `
 
 export const MetaGroup = styled.div`
-  margin-left: 1rem;
+  margin: 0 1rem;
   box-sizing: border-box;
 `

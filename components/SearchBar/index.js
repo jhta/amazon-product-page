@@ -11,8 +11,21 @@ const theme = {
     listStyle: 'none',
     marginTop: '2rem',
     boxSizing: 'border-box'
+  },
+  input: {
+     border: '1px solid #007eb7',
+    borderRadius: '15px',
+    padding: '10px',
+    minWidth: '200px',
+    maxWidth: '475px',
+    width: '100%',
+    background: 'white',
+    marginBottom: '1rem',
+    color: '#007eb7',
+    fontSize: '16px'
   }
 }
+
 
 const SearchBar = ({ value, suggestions, changeValue, onFetch, clear }) => (
   <div>

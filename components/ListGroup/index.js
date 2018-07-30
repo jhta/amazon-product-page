@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import List from 'components/List'
 import InfiniteScroll from 'react-infinite-scroller'
 import { connect } from 'react-redux'
+import H1 from 'components/ui/H1'
 
 const ListGroup = ({ groups = [], order, hasMore, add }) => (
   <InfiniteScroll
@@ -14,8 +15,8 @@ const ListGroup = ({ groups = [], order, hasMore, add }) => (
     <section>
       {
         groups.map(({ title, reviews }, index) => (
-          <article key={index}>
-            <h1>{title}</h1>
+          <article key={`${title}-${index}`}>
+            <H1>{title}</H1>
             <List reviews={order === 'latest' ? reviews : reviews.slice().reverse()} />
           </article>
         ))
