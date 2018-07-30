@@ -1,42 +1,17 @@
 import fetch from 'isomorphic-unfetch'
 import Filter from 'libs/Filter'
-
-const API_URI = 'https://sellics-frontend-test.herokuapp.com/reviews/'
+import {
+  getPage,
+  selectFilter,
+  filterStars,
+  groupsByStars
+} from './utils'
+import InitialState from './utils/initialState'
 
 let filter = null
 
-const getPage = page => `${API_URI}${page}`
-
-const initialState = {
-  filter: null,
-  groups: [],
-  reviews: [],
-  error: null,
-  page: 1,
-  hasMore: false,
-  order: 'latest',
-  filterDate: 'month',
-  stars: 5
-}
-
-const selectFilter = (filterDate = 'month', filter) => filterDate === 'day'
-  ? filter.byDay
-  : filterDate === 'week'
-    ? filter.byWeek
-    : filter.byMonth
-
-const filterStars = (reviews = [], stars) => reviews
-  .filter(review => review.stars === stars)
-
-const groupsByStars = ({ reviews, filterDate, filter }, stars) => selectFilter(
-  filterDate,
-  filter
-)(
-  filterStars(reviews, stars)
-)
-
 export const reviews = {
-  state: initialState,
+  state: InitialState,
 
   reducers: {
     set: (state, payload) => ({
@@ -66,9 +41,8 @@ export const reviews = {
     }),
     addMore: (state, { reviews, hasMore }) => ({
       ...state,
-      ...payload,
       hasMore,
-      page: state.page +  1,
+      page: state.page + 1,
       groups: groupsByStars({
         ...state,
         reviews: [...state.reviews, ...reviews]
@@ -85,6 +59,7 @@ export const reviews = {
         filter = Filter()
         const groups = filter.byMonth(filterStars(data.reviews, 5)) || []
         dispatch.reviews.set({ ...data, groups, filter })
+        dispatch.searchList.set({ reviews: data.reviews })
       } catch (e) {
         dispatch.reviews.set({ error: e.message })
       }

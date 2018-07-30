@@ -2,14 +2,14 @@ import React from 'react'
 import GroupSelector from '../GroupSelector'
 import OrderSelector from '../OrderSelector'
 import StarsFilter from '../StarsFilter'
-import Stars from 'react-stars'
+import SearchBar from '../SearchBar'
 
 const Form = props => (
   <section>
-    Form
     <GroupSelector />
     <OrderSelector />
     <StarsFilter />
+    <SearchBar />
   </section>
 )
 

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import Container from 'components/ui/Container'
 import ListGroup from 'components/ListGroup'
 import Form from 'components/Form'
@@ -18,22 +19,36 @@ class Page extends Component {
   }
 
   render () {
-    const { order, groups } = this.props
+    const { order, groups, isSearching } = this.props
     return (
       <Container>
         <Form />
-        <ListGroup
-          groups={order === 'latest' ? groups : groups.slice().reverse()}
-          order={order}
-        />
+        {
+          !isSearching
+            ? (
+              <ListGroup
+                groups={order === 'latest' ? groups : groups.slice().reverse()}
+                order={order}
+              />
+            )
+            : null
+        }
       </Container>
     )
   }
 }
 
-const mapState = ({ reviews: { groups, order } }) => ({
+Page.propTypes = {
+  order: PropTypes.string.isRequired,
+  isSearching: PropTypes.bool.isRequired,
+  groups: PropTypes.array.isRequired,
+  start: PropTypes.func.isRequired
+}
+
+const mapState = ({ reviews: { groups, order }, searchList: { isSearching } }) => ({
   groups,
-  order
+  order,
+  isSearching
 })
 
 const mapDispatch = ({ reviews: { startFilter } }) => ({

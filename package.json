@@ -22,6 +22,7 @@
     "next": "^6.1.1",
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
+    "react-autosuggest": "^9.3.4",
     "react-dom": "^16.4.1",
     "react-infinite-scroller": "^1.2.0",
     "react-redux": "^5.0.7",

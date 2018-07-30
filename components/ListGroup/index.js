@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import List from 'components/List'
 import InfiniteScroll from 'react-infinite-scroller'
 import { connect } from 'react-redux'
@@ -6,7 +7,7 @@ import { connect } from 'react-redux'
 const ListGroup = ({ groups = [], order, hasMore, add }) => (
   <InfiniteScroll
     pageStart={0}
-    loadMore={() => { console.log('hey!!!'); add() }}
+    loadMore={() => { add() }}
     hasMore={hasMore}
     loader={<div>Loading...</div>}
   >
@@ -22,6 +23,13 @@ const ListGroup = ({ groups = [], order, hasMore, add }) => (
     </section>
   </InfiniteScroll>
 )
+
+ListGroup.propTypes = {
+  add: PropTypes.func.isRequired,
+  hasMore: PropTypes.bool,
+  groups: PropTypes.array,
+  order: PropTypes.string
+}
 
 const mapDispatch = ({ reviews: { add } }) => ({
   add

@@ -1,9 +1,13 @@
 import { init } from '@rematch/core'
 
-import * as models from './models'
+import { reviews } from './models'
+import { searchList } from './models/searchList'
 
 export default (initialState = {}) => init({
-  models,
+  models: {
+    reviews,
+    searchList
+  },
   redux: {
     initialState
   }
