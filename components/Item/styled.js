@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const ItemStyled = styled.li`
+export const ItemStyled = styled.div`
   padding: 1.5rem;
   margin-bottom: 1rem;
   box-sizing: border-box;

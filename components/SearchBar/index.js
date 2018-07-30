@@ -22,7 +22,8 @@ const theme = {
     background: 'white',
     marginBottom: '1rem',
     color: '#007eb7',
-    fontSize: '16px'
+    fontSize: '16px',
+    outline: 'none'
   }
 }
 
